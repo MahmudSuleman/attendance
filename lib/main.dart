@@ -1,5 +1,4 @@
 
-
 import 'package:attenndance/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,12 +18,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+
     return MaterialApp(
       title: 'Attendance',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        // backgroundColor: Colors.black12,
       ),
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(),
 
 
@@ -58,15 +60,36 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           centerTitle: true,
         ),
+
         body:SingleChildScrollView(
-      child:  Center(
-          child: Card(
+      child:
+      Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(left:10.0),
+            child:Row(
+          children: [
+
+            // SizedBox(width: 5.0,),
+            Image.asset('images/logo2.png',width: 200.0,),
+            Image.asset('images/blogo.jpg',width: 150.0,),
+        ],
+      )
+
+          ),
+          Card(
             elevation: 20.0,
             color: Colors.indigoAccent,
-            margin: EdgeInsets.only(left: 10.0, top: 150.0, right: 10.0,bottom: 150.0),
+            margin: EdgeInsets.only(left: 10.0, top: 10.0, right: 10.0,bottom: 10.0),
             child: Column(
               children: [
-               Center(child:Text("PLEASE LOGIN HERE")),
+               Center(
+                   child:Text("PLEASE LOGIN HERE",
+                     style: TextStyle(
+                       color: Colors.white,
+                       fontWeight: FontWeight.w800,
+                     ),
+                   )),
                 Container(
                     padding: EdgeInsets.only(top: 5.0),
                     margin: EdgeInsets.only(top:10.0),
@@ -123,19 +146,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: () async {
                         MyAuthentication().signIn(Email,Password);
                       Navigator.pushNamed(context, DashboardScreen.id);
-                        // try {
-                        //   UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-                        //       email: Email,
-                        //       password: Password,
-                        //   );
-                        //   Navigator.pushNamed(context, DashboardScreen.id);
-                        // } on FirebaseAuthException catch (e) {
-                        //   if (e.code == 'user-not-found') {
-                        //     Text('No user found for that email.');
-                        //   } else if (e.code == 'wrong-password') {
-                        //     Text('Wrong password provided for that user.');
-                        //   }
-                        // }
 
                       },
                       textColor: Colors.white,
@@ -174,9 +184,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
+          Container(
+            child:Image.asset('images/logo.jpg'),
+          ),
+          ]
+      ),
         ),
         )
-    )
     );
   }
 }
